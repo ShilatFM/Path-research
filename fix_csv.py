@@ -11,13 +11,11 @@ fixed = open('data/fixed.csv', 'a')
 broken_lines = []
 
 with open('data/oddetect.csv') as f:
-    fixed.write(f.readline())
     for index, line in enumerate(f):
         line_B = line.split(',')
         if len(line_B) == 14:
             fixed.write(line)
         else:
-            # print(line)
             logger.info(f"Broken line #{index}")
             broken_lines.append(index)
 
