@@ -1,5 +1,4 @@
 import logging
-import csv
 
 logging.basicConfig(
     format='[%(levelname)s %(asctime)s %(module)s:%(lineno)d] %(message)s',
@@ -13,6 +12,7 @@ broken_lines = []
 with open('data/oddetect.csv') as f:
     for index, line in enumerate(f):
         line_B = line.split(',')
+
         if len(line_B) == 14:
             fixed.write(line)
         else:
