@@ -17,7 +17,7 @@ class controller:
                 if len(self.m_model.current_df) < 20:
                     answer = input("if you want draw_one_by_one enter /y else enter /n:")
                     if answer == "/y":
-                        self.view.draw_one_by_one(self.m_model.df, self.m_model.current_df)
+                        self.view.draw_one_by_one(self.m_model.df, self.m_model.current_df, self.m_model.image)
                     else:
                         self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
                 else:
