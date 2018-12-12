@@ -17,11 +17,19 @@ class controller:
                 if len(self.m_model.current_df) < 20:
                     answer = input("if you want draw_one_by_one enter /y else enter /n:")
                     if answer == "/y":
+<<<<<<< HEAD
                         self.view.draw_one_by_one(self.m_model.df, self.m_model.current_df)
                     else:
                         self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
                 else:
                     self.view.draw(self.m_model.df, self.m_model.current_df.head(100), self.m_model.image)
+=======
+                        self.view.draw_one_by_one(self.m_model.df, self.m_model.current_df, self.m_model.image)
+                    else:
+                        self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
+                else:
+                    self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
+>>>>>>> b77a0ab02df588340e67cc0cf6c4b163daed6f0c
 
             elif command == '/time':
                 start = input("enter start time in the following format: hh:mm:ss\n")
@@ -59,8 +67,13 @@ class controller:
                 #     squers.append((x, y))
                 #     x = input("enter next squere\n")
                 self.m_model.filter_Square([(0,5)])
+<<<<<<< HEAD
                 print(self.m_model.current_df.head())
                 # self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
+=======
+                # print(self.m_model.current_df.head())
+                self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
+>>>>>>> b77a0ab02df588340e67cc0cf6c4b163daed6f0c
 
 
             elif command == '/clear':
