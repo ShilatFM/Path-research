@@ -5,4 +5,5 @@ def creat():
     df = df.head(20)
     df.to_pickle('data/to_pickle_test_fill.pk1.xz')
     test_df = pd.read_pickle("data/to_pickle_test_fill.pk1.xz")
+    print(test_df)
 creat()

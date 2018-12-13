@@ -15,7 +15,7 @@ class model:
         #               usecols=[ "x", "y", "obj", "seq", "filename", "time", "path_time", "delta_time"],
         #               parse_dates=["time"])
 
-        self.df = pd.read_pickle("data/to_pickle.pk1.xz")
+        self.df = pd.read_pickle(file_name)
 
         # self.ordering_data()
         # self.optimize_data()
@@ -68,7 +68,7 @@ class model:
     def area_filter(self, top_left, bottom_right):
 
         self.current_df = self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0])))\
-                                          & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
+                                          & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
 
 
     def for_filter_Square(self, top_left, bottom_right):
