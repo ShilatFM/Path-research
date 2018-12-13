@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import pylab as plta
+import matplotlib.ticker as plticker
+import pylab as plta
+import matplotlib.ticker as plticker
 class model:
 
     def __init__(self, file_name, img):
@@ -75,24 +78,61 @@ class model:
 
 
     def filter_Square(self, locaition_list):
-
+       print("filter_Square")
        im_size = self.image.shape
        width = im_size[1]
        height = im_size[0]
        num_segmentation = 10
 
        for i in locaition_list:
-
-           r = int(i[1])
-           c = int(i[0])
+           r = i // num_segmentation
+           c = i - (r * num_segmentation)
            top_left = (c * width / num_segmentation , (r + 1) * height / num_segmentation)
            bottom_right = ((c + 1) * width / num_segmentation, r * height / num_segmentation)
-
+           
            frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
-           self.df_for_filter_Square = pd.concat(frames)
+           self.df_for_filter_Square = pd.concat(frames, sort = True)
 
        self.current_df = self.df_for_filter_Square
        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
-                                                  "filename": [], "time": [], "path_time": [], "delta_time": []})
+                                                    "filename": [], "time": [], "path_time": [], "delta_time": []})
+    def drow_grid(self):
 
+        # Load the image
+        img =self.image
+        fig = plt.figure(figsize=(15, 10))
+        ax = fig.add_subplot(111)
 
+        im_size = self.image.shape
+        width = im_size[1]
+        height = im_size[0]
+
+        myInterval_w = width // 10
+        myInterval_h = height // 10
+
+        loc_w = plticker.MultipleLocator(base=myInterval_w)
+        loc_h = plticker.MultipleLocator(base=myInterval_h)
+
+        ax.xaxis.set_major_locator(loc_w)
+        ax.yaxis.set_major_locator(loc_h)
+
+        # Add the grid
+        ax.grid(which='major', axis='both', linestyle='-', color="k")
+
+        # Add the image
+        ax.imshow(img)
+
+        # Find number of gridsquares in x and y direction
+        nx = abs(int(float(ax.get_xlim()[1] - ax.get_xlim()[0]) / float(myInterval_w)))
+        ny = abs(int(float(ax.get_ylim()[1] - ax.get_ylim()[0]) / float(myInterval_h)))
+
+        # Add some labels to the gridsquares
+        for j in range(ny):
+            y = myInterval_h / 2 + j * myInterval_h
+            for i in range(nx):
+                x = myInterval_w / 2. + float(i) * myInterval_w
+                ax.text(x, y, '{:d}'.format(i + j * nx), color='k', ha='center', va='center')
+
+        # Show the result
+        plt.imshow(img)
+        plt.show()

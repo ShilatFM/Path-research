@@ -1,7 +1,9 @@
+# from model import model
 from model import model
 from view import view
 import pandas as pd
 CONST_SQUERS = 10
+filters = {'time': [] , 'date': [], 'area': [], 'areas_squers': []}
 class controller:
 
     def __init__(self, df_path, p_path):
@@ -51,18 +53,39 @@ class controller:
 
 
             elif command == '/area_squers':
-                # print("to stop adding squers press enter")
-                # squers = []
-                # x = input(f"enter x value and than y value for the first squere. values are between 0 and {CONST_SQUERS}\n when you are done enter 'q'")
-                # while (x != 'q'):
-                #     y = input("")
-                #     squers.append((x, y))
-                #     x = input("enter next squere\n")
-                self.m_model.filter_Square([(0,5)])
-                # print(self.m_model.current_df.head())
+
+                self.m_model.drow_grid()
+
+                print("to stop adding squers press enter")
+
+                while (True):
+
+                    x = input(f"enter first squere between 0 and 99\n")
+
+                    if not x:
+                        break
+
+                    try:
+
+                        int(x)
+
+                    except ValueError:
+
+                        print("value error, you must enter ints\n")
+
+                        continue
+
+                    if (0 <= int(x) <= 99):
+
+                        filters['areas_squers'].append(int(x))
+
+                    else:
+
+                        print("Value error, squere out of range\n")
+
+                self.m_model.filter_Square(filters['areas_squers'])
+
                 self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
-
-
             elif command == '/clear':
                 self.m_model.clear()
 
