@@ -17,7 +17,8 @@ class controller:
                 break
 
             if command == '/draw':
-                if len(self.m_model.current_df) < 20:
+
+                if len(self.m_model.current_df) < 50000:
                     answer = input("if you want draw_one_by_one enter /y else enter /n:")
                     if answer == "/y":
                         self.view.draw_one_by_one(self.m_model.df, self.m_model.current_df, self.m_model.image)
