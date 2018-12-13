@@ -96,3 +96,6 @@ class model:
                                                   "filename": [], "time": [], "path_time": [], "delta_time": []})
 
 
+    def clear(self):
+        self.current_df = self.df
+

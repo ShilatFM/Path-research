@@ -13,6 +13,10 @@ c = controller(df_path, p_path)
 c.run()
 # TODO LIST:
 
-# PICKLE FILE
+#PICKLE FILE
+#view
+#cli
+
+
 # input validation
 # input for squers
