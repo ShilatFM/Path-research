@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 import pandas as pd
 
+
 class view:
 
     def __init__(self):
@@ -200,7 +201,8 @@ class view:
         elif command == '/clear':
             self.filters = {'time': [], 'date': [], 'area': [], 'areas_squers': []}
             return ["clear"]
-
+        elif command == '/heatmap':
+            return ['heatmap']
         else:
             print("invalid command")
             return ["invalid command"]

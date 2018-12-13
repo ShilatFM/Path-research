@@ -1,3 +1,5 @@
+import seaborn
+import matplotlib.pyplot as plt
 from model import model
 from view import view
 import pandas as pd
@@ -34,6 +36,10 @@ class controller:
 
             elif com[0] == "draw":
                 self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
+
+            elif com[0] == "heatmap":
+                   seaborn.heatmap(self.m_model.df)
+                   plt.show()
 
             com = self.view.run(self.m_model.image, self.m_model.df, self.m_model.current_df)
 

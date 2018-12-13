@@ -1,7 +1,8 @@
 # PATHS RESEARCH
 
-* {Participant 1 Name}
-* {Participant 2 Name}
-* {Participant 3 Name}
+* Hodaya Marciano
+* Gity Frenkel
+* Sary Weisberger
+* Shilat F. Myzel
 
 {OPTIONAL: MORE PROJECT INFO}
