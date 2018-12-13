@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-
 class model:
 
     def __init__(self, file_name, img):
@@ -15,11 +13,12 @@ class model:
         #               parse_dates=["time"])
 
         self.df = pd.read_pickle("data/to_pickle.pk1.xz")
+
         # self.ordering_data()
         # self.optimize_data()
 
         self.current_df = self.df
-        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],\
+        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
                                                   "filename": [], "time": [], "path_time": [], "delta_time": []})
 
     def ordering_data(self):
@@ -90,16 +89,10 @@ class model:
            bottom_right = ((c + 1) * width / num_segmentation, r * height / num_segmentation)
 
            frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
-
            self.df_for_filter_Square = pd.concat(frames)
 
-           print(self.for_filter_Square(top_left, bottom_right))
-           print("****************************************")
-           print("****************************************")
-           print("****************************************")
-           # self.df_for_filter_Square.append(self.for_filter_Square(top_left, bottom_right))
-
        self.current_df = self.df_for_filter_Square
-
+       self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
+                                                  "filename": [], "time": [], "path_time": [], "delta_time": []})
 
 
