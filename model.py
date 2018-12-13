@@ -1,8 +1,5 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import pylab as plta
-import matplotlib.ticker as plticker
-import pylab as plta
 import matplotlib.ticker as plticker
 class model:
 
@@ -78,7 +75,6 @@ class model:
 
 
     def filter_Square(self, locaition_list):
-       print("filter_Square")
        im_size = self.image.shape
        width = im_size[1]
        height = im_size[0]
