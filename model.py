@@ -95,4 +95,5 @@ class model:
        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
                                                   "filename": [], "time": [], "path_time": [], "delta_time": []})
 
-
+    def clear(self):
+        self.current_df = self.df
