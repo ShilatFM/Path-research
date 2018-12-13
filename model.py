@@ -65,36 +65,31 @@ class model:
     def area_filter(self, top_left, bottom_right):
 
         self.current_df = self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0])))\
-                                          & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
-
+                                          & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
 
     def for_filter_Square(self, top_left, bottom_right):
 
         return self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0]))) \
-                                          & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
-
+                                          & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
 
     def filter_Square(self, locaition_list):
 
-       im_size = self.image.shape
-       width = im_size[1]
-       height = im_size[0]
-       num_segmentation = 10
+        im_size = self.image.shape
+        width = im_size[1]
+        height = im_size[0]
+        num_segmentation = 10
 
-       for i in locaition_list:
+        for i in locaition_list:
+            r = i // num_segmentation
+            c = i - (r * num_segmentation)
+            top_left = (c * width / num_segmentation, r * height / num_segmentation)
+            bottom_right = ((c + 1) * width / num_segmentation, (r + 1) * height / num_segmentation)
+            frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
+            self.df_for_filter_Square = pd.concat(frames)
 
-           r = int(i[1])
-           c = int(i[0])
-           top_left = (c * width / num_segmentation , (r + 1) * height / num_segmentation)
-           bottom_right = ((c + 1) * width / num_segmentation, r * height / num_segmentation)
-
-           frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
-           self.df_for_filter_Square = pd.concat(frames)
-
-       self.current_df = self.df_for_filter_Square
-       self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
+        self.current_df = self.df_for_filter_Square
+        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
                                                   "filename": [], "time": [], "path_time": [], "delta_time": []})
-
 
     def clear(self):
         self.current_df = self.df
