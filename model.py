@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import matplotlib.ticker as plticker
+
 class model:
 
     def __init__(self, file_name, img):
@@ -12,7 +12,7 @@ class model:
         #               usecols=[ "x", "y", "obj", "seq", "filename", "time", "path_time", "delta_time"],
         #               parse_dates=["time"])
 
-        self.df = pd.read_pickle(file_name)
+        self.df = pd.read_pickle("data/to_pickle.pk1.xz")
 
         # self.ordering_data()
         # self.optimize_data()
@@ -67,68 +67,29 @@ class model:
         self.current_df = self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0])))\
                                           & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
 
-
     def for_filter_Square(self, top_left, bottom_right):
 
         return self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0]))) \
-                                          & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
-
+                                          & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
 
     def filter_Square(self, locaition_list):
-       im_size = self.image.shape
-       width = im_size[1]
-       height = im_size[0]
-       num_segmentation = 10
-
-       for i in locaition_list:
-           r = i // num_segmentation
-           c = i - (r * num_segmentation)
-           top_left = (c * width / num_segmentation , (r + 1) * height / num_segmentation)
-           bottom_right = ((c + 1) * width / num_segmentation, r * height / num_segmentation)
-           
-           frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
-           self.df_for_filter_Square = pd.concat(frames, sort = True)
-
-       self.current_df = self.df_for_filter_Square
-       self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
-                                                    "filename": [], "time": [], "path_time": [], "delta_time": []})
-    def drow_grid(self):
-
-        # Load the image
-        img =self.image
-        fig = plt.figure(figsize=(15, 10))
-        ax = fig.add_subplot(111)
 
         im_size = self.image.shape
         width = im_size[1]
         height = im_size[0]
+        num_segmentation = 10
 
-        myInterval_w = width // 10
-        myInterval_h = height // 10
+        for i in locaition_list:
+            r = i // num_segmentation
+            c = i - (r * num_segmentation)
+            top_left = (c * width / num_segmentation, r * height / num_segmentation)
+            bottom_right = ((c + 1) * width / num_segmentation, (r + 1) * height / num_segmentation)
+            frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
+            self.df_for_filter_Square = pd.concat(frames)
 
-        loc_w = plticker.MultipleLocator(base=myInterval_w)
-        loc_h = plticker.MultipleLocator(base=myInterval_h)
+        self.current_df = self.df_for_filter_Square
+        self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
+                                                  "filename": [], "time": [], "path_time": [], "delta_time": []})
 
-        ax.xaxis.set_major_locator(loc_w)
-        ax.yaxis.set_major_locator(loc_h)
-
-        # Add the grid
-        ax.grid(which='major', axis='both', linestyle='-', color="k")
-
-        # Add the image
-        ax.imshow(img)
-
-        # Find number of gridsquares in x and y direction
-        nx = abs(int(float(ax.get_xlim()[1] - ax.get_xlim()[0]) / float(myInterval_w)))
-        ny = abs(int(float(ax.get_ylim()[1] - ax.get_ylim()[0]) / float(myInterval_h)))
-
-        # Add some labels to the gridsquares
-        for j in range(ny):
-            y = myInterval_h / 2 + j * myInterval_h
-            for i in range(nx):
-                x = myInterval_w / 2. + float(i) * myInterval_w
-                ax.text(x, y, '{:d}'.format(i + j * nx), color='k', ha='center', va='center')
-
-        # Show the result
-        plt.imshow(img)
-        plt.show()
+    def clear(self):
+        self.current_df = self.df

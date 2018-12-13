@@ -17,13 +17,15 @@ class view:
         for t in table.index:
             s_o = df_by_obj.loc[t]
             plt.plot(s_o.x, s_o.y, label = t[1])
-        plt.legend(loc=9, bbox_to_anchor=(1.1, 1))
+        plt.legend(loc=9, bbox_to_anchor=(1, 1))
 
         plt.show()
 
     def draw_one_by_one(self, original_df, current_df, img):
-        print("im in draw")
-        table = current_df.groupby(['filename', 'obj']).size()
+
+        print("im in draw_one_by_one")
+
+        table = current_df.groupby(['filename', 'obj']).size().head(200)
         df_by_obj = original_df.set_index(['filename', 'obj']).sort_index()
 
         for t in table.index:
@@ -35,4 +37,3 @@ class view:
             next = input("next?: ")
             if next != 'y':
                 break
-        plt.legend(loc=9, bbox_to_anchor=(1.1, 1))
