@@ -19,7 +19,7 @@ class controller:
     def __init__(self, df_path, p_path):
         self.m_model = model(df_path, p_path)
         commands = {'time': self.run_time, 'draw': self.draw, 'clear': self.clear, 'area_squers': self.area_squers,
-                    'date': self.date}
+                    'date': self.date, 'one_by_one': self.draw}
         self.gui_view = Gui(commands)
         self.filters = {'time': [], 'date': [], 'area': [], 'area_squers': []}
 
@@ -82,10 +82,15 @@ class controller:
 
     def draw(self):
 
-        table = self.m_model.current_df.groupby(['filename', 'obj']).size().head(200)
-        df_by_obj = self.m_model.df.set_index(['filename', 'obj']).sort_index()
+            table = self.m_model.current_df.groupby(['filename', 'obj']).size().head(2000)
+            df_by_obj = self.m_model.df.set_index(['filename', 'obj']).sort_index()
 
-        self.gui_view.draw_plt(table,df_by_obj,self.m_model.image)
+# ​            self.gui_view.draw_plt(table, df_by_obj, self.m_model.image)
+
+            if self.gui_view.is_checked_is_checked():
+               self.gui_view.draw_one_by_one(table,df_by_obj,self.m_model.image)
+            else:
+                self.gui_view.draw_plt(table,df_by_obj,self.m_model.image)
 
     def run(self):
 
@@ -133,4 +138,3 @@ class controller:
         #            plt.show()
         #
         #     com = self.view.run(self.m_model.image, self.m_model.df, self.m_model.current_df)
-

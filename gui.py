@@ -1,3 +1,4 @@
+
 import logging
 import tkinter as tk
 import pandas as pd
@@ -99,7 +100,8 @@ class Gui:
                               width=45, height=1).grid(row=12, column=5, padx=1, pady=5, sticky=tk.E,
                                                        columnspan=2)
 
-        self.one_by_one = tk.Checkbutton(self.master_frame, text="one by one", bg='white')
+        self.one_by_one_var = tk.IntVar(0)
+        self.one_by_one = tk.Checkbutton(self.master_frame, text="one by one", bg='white', variable=self.one_by_one_var)
         self.one_by_one.grid(row=13, column=5, sticky=tk.W, padx=5, pady=5)
 
         self.pause = tk.Checkbutton(self.master_frame, text="pause", bg='white')
@@ -119,6 +121,9 @@ class Gui:
 
     def get_date(self):
         return  self.date_input.get()
+
+    def is_checked_is_checked(self):
+        return self.one_by_one_var.get()
 
     def area_filter_def(self):
         area_fltr = self.area_input.get()
@@ -152,8 +157,6 @@ class Gui:
         canvas.show()
         canvas.get_tk_widget().grid( row = 1, rowspan = 8, columnspan=4, padx=5, pady=5)
 
+    def draw_one_by_one(self, table, df_by_obj, img):
+        print(type(img))
 
-
-
-
-# my_gui.mainloop()
