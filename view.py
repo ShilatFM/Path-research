@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 import pandas as pd
 
-
+# TODO
+# TOTIME FILTER
 class view:
 
     def __init__(self):
