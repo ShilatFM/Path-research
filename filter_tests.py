@@ -5,7 +5,9 @@ class FiltersTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_df = pd.read_pickle("data/to_pickle_test_fill.pk1.xz")
-        self.model = model("data/to_pickle_test_fill.pk1.xz", "C:\EXELLENTIM\paths0.png")
+        self.model = model()
+        self.model.load_data("data/to_pickle_test_fill.pk1.xz")
+        self.model.load_img("data/paths0.png")
 
     ############################test ones filter########################################
 
@@ -138,10 +140,12 @@ class FiltersTestCase(unittest.TestCase):
     def test_clear(self):
 
         len_table_before_filter = len(self.model.current_df)
+
         start_time = pd.to_datetime("01:27:09")
         end_time = pd.to_datetime("01:28:18")
 
         self.model.to_time_filter(start_time, end_time)
+
         self.model.clear()
 
         self.assertEqual(len_table_before_filter, len(self.model.current_df))
