@@ -3,16 +3,20 @@ import pandas as pd
 
 class model:
 
-    def __init__(self, file_name, img):
+    def __init__(self):
+        pass
 
-        self.image = plt.imread(img)
+    def load_img(self, p_img):
+        self.image = plt.imread(p_img)
+
+    def load_data(self, p_data):
         # self.df = pd.read_csv(file_name,
         #               names=["frame", "x", "y", "obj", "size", "seq", "tbd1", "tbd2", "tbd3",
         #                      "filename", "time", "path_time", "delta_time", "tbd4"],
         #               usecols=[ "x", "y", "obj", "seq", "filename", "time", "path_time", "delta_time"],
         #               parse_dates=["time"])
 
-        self.df = pd.read_pickle("data/to_pickle.pk1.xz")
+        self.df = pd.read_pickle(p_data)
 
         # self.ordering_data()
         # self.optimize_data()
@@ -20,7 +24,6 @@ class model:
         self.current_df = self.df
         self.df_for_filter_Square = pd.DataFrame({"x": [], "y": [], "obj": [], "seq": [],
                                                   "filename": [], "time": [], "path_time": [], "delta_time": []})
-
     def ordering_data(self):
 
         self.df['time'] = self.df['time'] + pd.to_timedelta(self.df['delta_time'])
