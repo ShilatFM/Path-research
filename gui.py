@@ -24,7 +24,7 @@ class Gui:
         self.init_canvas()
         self.init_enries()
         self.init_buttons()
-        self.init_lables()
+        self.init_labels()
         self.check_buttons()
 
 
@@ -42,25 +42,28 @@ class Gui:
         self.one_by_one.grid(row=12, column=5, sticky=tk.W, padx=5, pady=5)
 
 
-    def init_lables(self):
+    def init_labels(self):
 
-        tk.Label(self.master_frame, text="Enter start\nand end time", bg='white').grid(row=1, column=5,
+        tk.Label(self.master_frame, text="Enter start and end time", bg='white').grid(row=1, column=5,
                                                                                        sticky=tk.W, padx=5, pady=5)
 
-        tk.Label(self.master_frame, text="Enter (x1,y1)\n(x2, y2)", bg='white').grid(row=3, column=5, sticky=tk.W,
+        tk.Label(self.master_frame, text="Enter x1,y1,x2, y2", bg='white').grid(row=3, column=5, sticky=tk.W,
                                                                                      padx=5, pady=5)
 
-        tk.Label(self.master_frame, text="Enter squere\nnumber", bg='white').grid(row=5, column=5, sticky=tk.W,
+        tk.Label(self.master_frame, text="Enter squere number", bg='white').grid(row=5, column=5, sticky=tk.W,
                                                                                   padx=5, pady=5)
 
-        tk.Label(self.master_frame, text="Enter date\n+ start and \nend hour", bg='white').grid(row=7, column=5,
+        tk.Label(self.master_frame, text="Enter date, start and end hour", bg='white').grid(row=7, column=5,
                                                                                                 sticky=tk.W, padx=5,
                                                                                                 pady=5)
 
         self.status = tk.Label(self.master_frame,
-                               text="here you will see all messages", width=50,
-                               height=14, bg='white')
-        self.status.grid(row=9, rowspan=6, column=0, columnspan=3, padx=5, sticky=tk.E, pady=5)
+                               text="here you will see all messages", width=70,
+                               height=14, bg='white', borderwidth=4, relief="groove")
+        self.status.grid(row=9, rowspan=8, column=0, columnspan=3, padx=5, sticky=tk.E, pady=5)
+
+        tk.Label(self.master_frame, text="Enter NxN for division", bg='white').grid(row=14, column=5,
+                                                                                      sticky=tk.W, padx=5, pady=5)
 
     def init_buttons(self):
 
@@ -109,6 +112,9 @@ class Gui:
         self.time_input = tk.Entry(self.master_frame)
         self.time_input.grid(row=1, column=6, sticky=tk.E, padx=5, pady=5)
 
+        self.grid_input = tk.Entry(self.master_frame)
+        self.grid_input.grid(row=14, column=6, sticky=tk.E, padx=5, pady=5)
+
         self.area_input = tk.Entry(self.master_frame)
         self.area_input.grid(row=3, column=6, sticky=tk.E, padx=5, pady=5)
 
@@ -132,6 +138,9 @@ class Gui:
 
     def get_image_path(self):
         return self.img_path.get()
+
+    def get_grid(self):
+        return  self.grid_input.get()
 
     def get_data_path(self):
         return self.data_path.get()

@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 
 class model:
@@ -6,18 +5,12 @@ class model:
     def __init__(self):
         pass
 
-    def load_img(self, p_img):
-        self.image = plt.imread(p_img)
+    def load_img(self, img):
+        self.image = img
 
-    def load_data(self, p_data):
-        # self.df = pd.read_csv(file_name,
-        #               names=["frame", "x", "y", "obj", "size", "seq", "tbd1", "tbd2", "tbd3",
-        #                      "filename", "time", "path_time", "delta_time", "tbd4"],
-        #               usecols=[ "x", "y", "obj", "seq", "filename", "time", "path_time", "delta_time"],
-        #               parse_dates=["time"])
+    def load_data(self, df_data):
 
-        self.df = pd.read_pickle(p_data)
-
+        self.df = df_data
         # self.ordering_data()
         # self.optimize_data()
 
@@ -67,8 +60,8 @@ class model:
 
     def area_filter(self, top_left, bottom_right):
 
-        self.current_df = self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0])))\
-                                          & (self.current_df.y.between(int(top_left[1]), int(bottom_right[1])))]
+        self.current_df = self.current_df[(self.current_df.x.between(top_left[0], bottom_right[0]))\
+                                          & (self.current_df.y.between(top_left[1], bottom_right[1]))]
 
     def for_filter_Square(self, top_left, bottom_right):
 
