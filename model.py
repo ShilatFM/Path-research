@@ -50,12 +50,12 @@ class model:
 
         self.df.drop_duplicates()
 
-    def to_time_filter(self, start_date, end_date):
+    def time_filter(self, start_date, end_date):
 
         self.current_df = self.current_df[(self.current_df.time.dt.time > start_date.time())\
                                   & (self.current_df.time.dt.time <= end_date.time())]
 
-    def to_date_filter(self, specific_date, start_time, end_time):
+    def date_filter(self, specific_date, start_time, end_time):
 
         self.current_df = self.current_df[(self.current_df.time.dt.time >= start_time.time())\
                             & (self.current_df.time.dt.time <= end_time.time())\
@@ -68,13 +68,13 @@ class model:
                                           & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
 
 
-    def for_filter_Square(self, top_left, bottom_right):
+    def area_by_square_df(self, top_left, bottom_right):
 
         return self.current_df[(self.current_df.x.between(int(top_left[0]), int(bottom_right[0]))) \
                                           & (self.current_df.y.between(int(bottom_right[1]), int(top_left[1])))]
 
 
-    def filter_Square(self, locaition_list):
+    def area_by_square_filter(self, locaition_list):
 
        im_size = self.image.shape
        width = im_size[1]
@@ -88,7 +88,7 @@ class model:
            top_left = (c * width / num_segmentation , (r + 1) * height / num_segmentation)
            bottom_right = ((c + 1) * width / num_segmentation, r * height / num_segmentation)
 
-           frames = [self.df_for_filter_Square, self.for_filter_Square(top_left, bottom_right)]
+           frames = [self.df_for_filter_Square, self.area_by_square_df(top_left, bottom_right)]
            self.df_for_filter_Square = pd.concat(frames)
 
        self.current_df = self.df_for_filter_Square

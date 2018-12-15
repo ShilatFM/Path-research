@@ -28,7 +28,7 @@ class controller:
                 start_time = pd.to_datetime(start)
                 end = input("enter end time in the following format: hh:mm:ss\n")
                 end_time = pd.to_datetime(end)
-                self.m_model.to_time_filter(start_time, end_time)
+                self.m_model.time_filter(start_time, end_time)
                 self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
 
             elif command == '/date':
@@ -38,7 +38,7 @@ class controller:
                 start_time = pd.to_datetime(start)
                 end = input("enter end time in the following format: hh:mm:ss\n")
                 end_time = pd.to_datetime(end)
-                self.m_model.to_date_filter(my_date, start_time, end_time)
+                self.m_model.date_filter(my_date, start_time, end_time)
                 self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
 
             elif command == '/area':
@@ -58,7 +58,7 @@ class controller:
                 #     y = input("")
                 #     squers.append((x, y))
                 #     x = input("enter next squere\n")
-                self.m_model.filter_Square([(0,5)])
+                self.m_model.area_by_square_filter([(0,5)])
                 # print(self.m_model.current_df.head())
                 self.view.draw(self.m_model.df, self.m_model.current_df, self.m_model.image)
 

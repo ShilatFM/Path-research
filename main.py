@@ -7,7 +7,7 @@ from controller import controller
 #    # df = pd.read_pickle(df_path)
 
 df_path = "data/to_pickle.pk1.xz"
-p_path = "data/paths0.png"
+p_path = "paths0.png"
 print("im here")
 c = controller(df_path, p_path)
 c.run()
