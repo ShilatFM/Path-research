@@ -4,8 +4,12 @@
 * Gity Frenkel
 * Sary Weisberger
 * Shilat F. Myzel
-#### Gui
+
+#### General gui
 ![hech map](https://github.com/Elevationacademy/xt-paths-research-ella-sh-s-h-g/blob/master/demo.PNG)
+
+#### Grid
+![hech map](https://github.com/Elevationacademy/xt-paths-research-ella-sh-s-h-g/blob/master/demo_grid.PNG)
 
 
 #### Runnig
@@ -13,8 +17,9 @@
 * python main.py
 
 #### Dependencies
+
 * pandas
-* matplot
+* matplotlib
 * tkinter
 
 #### Notes
