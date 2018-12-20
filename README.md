@@ -24,5 +24,7 @@
 
 #### Notes
 
-*
+* for each filter the parameters should be inserted according to the pattern next it.
+* without parameters draw will draw the first 200 routes.
+* clear initialize the filters list.
 
