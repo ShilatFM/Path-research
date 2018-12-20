@@ -5,4 +5,16 @@
 * Sary Weisberger
 * Shilat F. Myzel
 
-{OPTIONAL: MORE PROJECT INFO}
+# Runnig
+
+* python main.py
+
+#### Dependencies
+* pandas
+* matplot
+* tkinter
+
+#### Notes
+
+*
+
